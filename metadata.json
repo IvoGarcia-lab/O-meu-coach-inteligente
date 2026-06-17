@@ -1,0 +1,6 @@
+{
+  "name": "O Meu Coach Inteligente",
+  "description": "Aplicação inteligente de saúde e fitness que analisa as suas refeições via IA e adapta os seus treinos dinamicamente com base no seu perfil clínico e biométrico.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

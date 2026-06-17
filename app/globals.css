@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-body), "Nunito Sans", sans-serif;
+  --font-headline: var(--font-headline), "Literata", serif;
+  --font-display: var(--font-headline), "Literata", serif;
+  --font-body: var(--font-body), "Nunito Sans", sans-serif;
+  --font-label: var(--font-body), "Nunito Sans", sans-serif;
+
+  --color-on-surface: #2e3230;
+  --color-inverse-primary: #8ecf9e;
+  --color-secondary-fixed: #f0e8db;
+  --color-surface-variant: #e4e0d8;
+  --color-on-tertiary-fixed: #221a05;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-high: #eae6de;
+  --color-surface: #faf6f0;
+  --color-surface-bright: #faf6f0;
+  --color-on-secondary: #ffffff;
+  --color-tertiary-fixed-dim: #dcc48e;
+  --color-on-primary-fixed: #002110;
+  --color-on-error-container: #690005;
+  --color-surface-tint: #4a7c59;
+  --color-secondary: #6b6358;
+  --color-on-tertiary-container: #554020;
+  --color-surface-container: #f0ece4;
+  --color-outline: #74796e;
+  --color-on-tertiary-fixed-variant: #554020;
+  --color-surface-container-low: #f5f1ea;
+  --color-on-background: #2e3230;
+  --color-primary-fixed-dim: #8ecf9e;
+  --color-tertiary: #705c30;
+  --color-tertiary-container: #c4a66a;
+  --color-tertiary-fixed: #f8e0a8;
+  --color-on-secondary-container: #5e5548;
+  --color-inverse-on-surface: #f5f0e8;
+  --color-on-primary-fixed-variant: #2a6038;
+  --color-on-tertiary: #ffffff;
+  --color-error-container: #ffdad8;
+  --color-surface-dim: #dbd7cf;
+  --color-surface-container-highest: #e4e0d8;
+  --color-secondary-container: #f0e8db;
+  --color-secondary-fixed-dim: #d4ccbf;
+  --color-primary-container: #78a886;
+  --color-primary-fixed: #c8e8d0;
+  --color-outline-variant: #c4c8bc;
+  --color-on-surface-variant: #4a4e4a;
+  --color-background: #faf6f0;
+  --color-on-error: #ffffff;
+  --color-on-primary-container: #d8f0de;
+  --color-inverse-surface: #2e3230;
+  --color-primary: #4a7c59;
+  --color-on-primary: #ffffff;
+  --color-on-secondary-fixed: #1e1a13;
+  --color-on-secondary-fixed-variant: #4a4538;
+  --color-error: #b83230;
+  
+  --shadow-custom: 0 4px 20px rgba(46, 50, 48, 0.06);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-on-background);
+    font-family: var(--font-body);
+  }
+}
+
+/* Custom styles */
+.circular-progress {
+  background: radial-gradient(closest-side, white 79%, transparent 80% 100%),
+              conic-gradient(var(--color-primary) var(--progress, 74%), var(--color-surface-variant) 0);
+}
