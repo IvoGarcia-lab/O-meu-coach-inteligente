@@ -1,0 +1,74 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global Safety Net default catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidUser(data) {
+      return data.name is string && data.name.size() <= 100
+        && data.age is number && data.age >= 0 && data.age <= 150
+        && data.weight is number && data.weight >= 0 && data.weight <= 1000
+        && data.height is number && data.height >= 0 && data.height <= 3.0
+        && data.goal is string && data.goal.size() <= 200
+        && (data.level == null || (data.level is string && data.level.size() <= 100))
+        && (data.location == null || (data.location is string && data.location.size() <= 200))
+        && (data.allergies == null || data.allergies is list)
+        && (data.medications == null || data.medications is list)
+        && (data.isPremium == null || data.isPremium is bool)
+        && (data.waterIntake == null || data.waterIntake is number);
+    }
+
+    function isValidMeal(data) {
+      return data.id is string && data.id.size() <= 128
+        && data.time is string && data.time.size() <= 24
+        && data.type is string && data.type.size() <= 100
+        && data.title is string && data.title.size() <= 200
+        && (data.description == null || (data.description is string && data.description.size() <= 2000))
+        && data.kcal is number && data.kcal >= 0
+        && data.protein is number && data.protein >= 0
+        && data.carbs is number && data.carbs >= 0
+        && data.fat is number && data.fat >= 0
+        && (data.coachFeedback == null || (data.coachFeedback is string && data.coachFeedback.size() <= 5000))
+        && (data.image == null || (data.image is string && data.image.size() <= 1000));
+    }
+
+    // Main collections
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create: if isOwner(userId) && isValidUser(incoming());
+      allow update: if isOwner(userId) && isValidUser(incoming());
+      allow delete: if isOwner(userId);
+
+      match /meals/{mealId} {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidId(mealId) && isValidMeal(incoming());
+        allow update: if isOwner(userId) && isValidId(mealId) && isValidMeal(incoming());
+        allow delete: if isOwner(userId) && isValidId(mealId);
+      }
+    }
+  }
+}

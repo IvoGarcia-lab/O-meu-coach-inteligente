@@ -1,0 +1,53 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User biometric and clinic profile for O Meu Coach Inteligente",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "age": { "type": "number" },
+        "weight": { "type": "number" },
+        "height": { "type": "number" },
+        "goal": { "type": "string" },
+        "level": { "type": "string" },
+        "location": { "type": "string" },
+        "allergies": { "type": "array" },
+        "medications": { "type": "array" },
+        "isPremium": { "type": "boolean" },
+        "waterIntake": { "type": "number" },
+        "workoutVideoUrl": { "type": "string" }
+      },
+      "required": ["name", "age", "weight", "height", "goal", "isPremium"]
+    },
+    "Meal": {
+      "title": "Meal Log",
+      "description": "Meal nutrition analysis log with Gemini Coach advice",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "time": { "type": "string" },
+        "type": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "kcal": { "type": "number" },
+        "protein": { "type": "number" },
+        "carbs": { "type": "number" },
+        "fat": { "type": "number" },
+        "coachFeedback": { "type": "string" },
+        "image": { "type": "string" }
+      },
+      "required": ["id", "time", "type", "title", "kcal", "protein", "carbs", "fat"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "users/{userId}/meals/{mealId}": {
+      "schema": "Meal",
+      "description": "Meal logs for each user"
+    }
+  }
+}
