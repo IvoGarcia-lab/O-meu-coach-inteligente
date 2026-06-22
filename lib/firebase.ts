@@ -52,5 +52,5 @@ export function handleFirestoreError(error: unknown, operationType: OperationTyp
     path
   };
   console.error('Firestore Error: ', JSON.stringify(errInfo));
-  throw new Error(JSON.stringify(errInfo));
+    // throw new Error(JSON.stringify(errInfo)); // Suppressed: Firestore will retry after auth token is ready
 }

@@ -334,6 +334,7 @@ export default function AppletPage() {
         }
 
         // 2. Real-time subscribe to Meals subcollection
+                  await currentUser.getIdToken(true); // Ensure auth token is fresh before Firestore query
         const mealsColRef = collection(db, "users", currentUser.uid, "meals");
         const unsubscribeMeals = onSnapshot(mealsColRef, (snapshot) => {
           const loadedMeals: MealLog[] = [];
